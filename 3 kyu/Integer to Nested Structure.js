@@ -127,5 +127,3 @@ function decode(num) {
 
     return reconstruct(arr);
 }
-
-console.log(decode(185)); // 0
