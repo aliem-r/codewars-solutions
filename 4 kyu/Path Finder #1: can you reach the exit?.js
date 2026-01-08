@@ -12,11 +12,6 @@ function pathFinder(maze) {
 
     while(index < queue.length) {
         const current = queue[index++];
-        
-        if(visited.has(current.key))
-            continue;
-
-        visited.add(current.key);
 
         if(current.x === size - 1 && current.y === size - 1)
             return true;
@@ -36,12 +31,13 @@ function pathFinder(maze) {
                 continue
 
             const neighborKey = `${neighborX},${neighborY}`;
+
             if (visited.has(neighborKey))
                 continue;
-
+            
+            visited.add(neighborKey);
             queue.push({ x: neighborX, y: neighborY, key: neighborKey });
         }
-
     }
 
     return false;
