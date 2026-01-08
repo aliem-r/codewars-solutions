@@ -28,7 +28,7 @@ function pathFinder(maze) {
             const neighborY = current.y + dy;
 
             if(neighborX < 0 || neighborY < 0 || neighborX >= size || neighborY >= size || grid[neighborY][neighborX] === "W")
-                continue
+                continue;
 
             const neighborKey = `${neighborX},${neighborY}`;
 
