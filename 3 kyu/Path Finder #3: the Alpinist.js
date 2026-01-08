@@ -42,13 +42,12 @@ function pathFinder(area) {
             // Ignore positions outside the grid
             if(neighborX < 0 || neighborY < 0 || neighborX >= size || neighborY >= size) continue;
 
-            const neighborKey = `${neighborX},${neighborY}`;
-            if (visited.has(neighborKey))
-                continue;
-
+            
             const neighborHeight = grid[neighborY][neighborX];
             const stepCost = Math.abs(currentHeight - neighborHeight);
             const newCost = currentCost + stepCost;
+            
+            const neighborKey = `${neighborX},${neighborY}`;
             
             // If this path to neighbor is cheaper, update its cost and add to pending
             if(costs[neighborKey] === undefined || newCost < costs[neighborKey]) {
