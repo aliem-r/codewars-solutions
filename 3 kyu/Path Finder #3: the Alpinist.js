@@ -1,15 +1,19 @@
 // https://www.codewars.com/kata/576986639772456f6f00030c
 
 function pathFinder(area) {
+
     const grid = area.trim().split("\n").map((row) => row.split("").map(Number));
     const size = grid.length;
     const startNode = "0,0";
 
-    const costs = {[startNode]: 0};
-    const visited = new Set();
-    const pending = [{x: 0 , y: 0, key: startNode}];
+    const costs = {[startNode]: 0}; // Tracks the cost to reach each node
+    const visited = new Set(); // Stores visited nodes
+    const pending = [{x: 0 , y: 0, key: startNode}]; // Stores nodes to be evaluated
+
 
     while(pending.length > 0) {
+
+        // Sort and shift to get the node with the lowest cost
         pending.sort((a,b) => costs[a.key] - costs[b.key]);
         const current = pending.shift();
 
@@ -35,6 +39,7 @@ function pathFinder(area) {
             const neighborX = current.x + dx
             const neighborY = current.y + dy
 
+            // Ignore positions outside the grid
             if(neighborX < 0 || neighborY < 0 || neighborX >= size || neighborY >= size) continue;
 
             const neighborKey = `${neighborX},${neighborY}`;
@@ -45,6 +50,7 @@ function pathFinder(area) {
             const stepCost = Math.abs(currentHeight - neighborHeight);
             const newCost = currentCost + stepCost;
             
+            // If this path to neighbor is cheaper, update its cost and add to pending
             if(costs[neighborKey] === undefined || newCost < costs[neighborKey]) {
                 costs[neighborKey] = newCost;
                 pending.push({ x: neighborX, y: neighborY, key: neighborKey });
